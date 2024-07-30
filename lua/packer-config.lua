@@ -104,11 +104,5 @@ require('packer').startup(function(use)
             }
         end
     }
-
-    use {
-        'nyngwang/nvimgelion',
-        config = function()
-            -- do whatever you want for further customization~
-        end
-    }
+    use { "diegoulloao/neofusion.nvim" }
 end)
