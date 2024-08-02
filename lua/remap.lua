@@ -10,7 +10,7 @@ vim.keymap.set("x", "<leader>p", "\"_dP")
 -- Copy to system clipboard with leader + y in visual mode
 vim.keymap.set("v", "<leader>y", "\"+y")
 -- Copy the buffer path to system clipboard
-vim.keymap.set("n", "<leader>Y", ":let @+=@%<CR>")
+vim.keymap.set("n", "<leader>Y", ":let @+ = expand('%:p')<CR>")
 
 -- Paste from system clipboard
 vim.keymap.set("i", "<C-v>", "<C-p>+")

@@ -3,6 +3,7 @@ vim.cmd([[ colorscheme neofusion ]])
 require("remap")
 require("set")
 require("packer-config")
+require("dirfunc")
 
 require 'nvim-treesitter.install'.prefer_git = false
 
