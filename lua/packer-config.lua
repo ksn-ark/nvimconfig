@@ -104,5 +104,5 @@ require('packer').startup(function(use)
             }
         end
     }
-    use { "diegoulloao/neofusion.nvim" }
+    use { "catppuccin/nvim", as = "catppuccin" }
 end)

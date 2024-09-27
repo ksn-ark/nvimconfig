@@ -1,3 +1,4 @@
+local util = require 'lspconfig.util'
 local lsp_zero = require("lsp-zero").preset({
     set_basic_mappings = false,
     set_extra_mappings = false,
@@ -10,13 +11,42 @@ require('mason-lspconfig').setup({
         'pylsp',
         'lua_ls',
         'rust_analyzer',
+        'cssls',
+        'terraformls'
     },
     handlers = {
         lsp_zero.default_setup,
         lua_ls = function()
             local lua_opts = lsp_zero.nvim_lua_ls()
             require("lspconfig").lua_ls.setup(lua_opts)
-        end
+        end,
+        eslint = function()
+            local eslint_opts = { workingDirectories = { mode = "auto" } }
+            require("lspconfig").eslint.setup(eslint_opts)
+        end,
+        cssls = function()
+            local cssls_opts = {
+                cmd = { "vscode-css-language-server", "--stdio" },
+                filetypes = { "css", "scss", "less" },
+                init_options = { provideFormatter = true },
+                root_dir = util.root_pattern('package.json', '.git'),
+                single_file_support = true,
+                settings = {
+                    css = { validate = true },
+                    scss = { validate = true },
+                    less = { validate = true },
+                },
+            }
+            require('lspconfig').cssls.setup(cssls_opts)
+        end,
+        terraformls = function()
+            local terraformls_opts = {
+                cmd = { "terraform-ls", "serve" },
+                filetypes = { "terraform", "hcl" },
+                root_dir = util.root_pattern(".terraform", ".git"),
+            }
+            require('lspconfig').terraformls.setup(terraformls_opts)
+        end,
     }
 })
 local cmp = require("cmp")

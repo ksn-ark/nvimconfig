@@ -5,6 +5,7 @@ local function store_cwd()
     local wd_record = io.open(cwd_path, "w")
     if wd_record then
         wd_record:write(vim.fn.getcwd() .. "\n")
+        io.close(wd_record)
     end
 end
 

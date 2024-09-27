@@ -64,4 +64,6 @@ vim.api.nvim_create_user_command("Upgrade", function()
     vim.cmd(":PackerSync")
 end, {})
 
+vim.api.nvim_create_user_command('W', 'w', {})
+
 -- TODO: Pane resizing
