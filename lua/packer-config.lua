@@ -5,8 +5,7 @@ require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.7',
-        requires = { { 'nvim-lua/plenary.nvim' } }
+        'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/plenary.nvim' } }
     }
 
     use {

@@ -1,6 +1,6 @@
 vim.filetype.add({ extension = { wgsl = "wgsl" } })
 
-require('nvim-treesitter.configs').setup {
+require('nvim-treesitter').setup {
     -- A list of parser names, or "all" (the five listed parsers should always be installed)
     ensure_installed = { "javascript", "typescript", "python", "rust", "c", "lua", "vim", "vimdoc", "query" },
 
@@ -114,8 +114,3 @@ require('nvim-treesitter.configs').setup {
 
 -- Tree inspect
 vim.keymap.set("n", "<leader>T", ":InspectTree<CR>")
-
--- This makes motions like ]f repeatable with ; and ,
-local ts_repeat_move = require "nvim-treesitter.textobjects.repeatable_move"
-vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
-vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
