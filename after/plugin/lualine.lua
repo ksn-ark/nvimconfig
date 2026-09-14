@@ -1,6 +1,6 @@
 require('lualine').setup {
     options = {
-        theme = "catppuccin",
+        theme = "catppuccin-nvim",
         icons_enabled = true,
         ignore_focus = {},
         always_divide_middle = true,

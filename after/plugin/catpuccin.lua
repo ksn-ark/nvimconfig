@@ -1,6 +1,6 @@
 require("catppuccin").setup({
     flavour = "mocha",             -- latte, frappe, macchiato, mocha
-    transparent_background = true, -- disables setting the background color.
+    -- transparent_background = true, -- disables setting the background color.
     default_integrations = true,
     integrations = {
         cmp = true,
