@@ -1,12 +1,18 @@
-local util = require 'lspconfig.util'
 local lsp_zero = require("lsp-zero").preset({
     set_basic_mappings = false,
     set_extra_mappings = false,
 })
+
+-- mason-lspconfig v2 enables installed servers via vim.lsp.enable,
+-- so per-server options live in vim.lsp.config (merged over nvim-lspconfig's defaults)
+vim.lsp.config('*', { capabilities = require('cmp_nvim_lsp').default_capabilities() })
+vim.lsp.config('lua_ls', lsp_zero.nvim_lua_ls())
+vim.lsp.config('terraformls', { filetypes = { "terraform", "hcl" } })
+
 require('mason').setup({})
 require('mason-lspconfig').setup({
     ensure_installed = {
-        'tsserver',
+        'ts_ls',
         'eslint',
         'pylsp',
         'lua_ls',
@@ -14,40 +20,6 @@ require('mason-lspconfig').setup({
         'cssls',
         'terraformls'
     },
-    handlers = {
-        lsp_zero.default_setup,
-        lua_ls = function()
-            local lua_opts = lsp_zero.nvim_lua_ls()
-            require("lspconfig").lua_ls.setup(lua_opts)
-        end,
-        eslint = function()
-            local eslint_opts = { workingDirectories = { mode = "auto" } }
-            require("lspconfig").eslint.setup(eslint_opts)
-        end,
-        cssls = function()
-            local cssls_opts = {
-                cmd = { "vscode-css-language-server", "--stdio" },
-                filetypes = { "css", "scss", "less" },
-                init_options = { provideFormatter = true },
-                root_dir = util.root_pattern('package.json', '.git'),
-                single_file_support = true,
-                settings = {
-                    css = { validate = true },
-                    scss = { validate = true },
-                    less = { validate = true },
-                },
-            }
-            require('lspconfig').cssls.setup(cssls_opts)
-        end,
-        terraformls = function()
-            local terraformls_opts = {
-                cmd = { "terraform-ls", "serve" },
-                filetypes = { "terraform", "hcl" },
-                root_dir = util.root_pattern(".terraform", ".git"),
-            }
-            require('lspconfig').terraformls.setup(terraformls_opts)
-        end,
-    }
 })
 local cmp = require("cmp")
 cmp.setup({
@@ -85,7 +57,7 @@ lsp_zero.on_attach(function(client, bufnum)
     end)
 
     -- Automatic format on save
-    vim.cmd [[autocmd BufWritePre * silent! lua vim.lsp.buf.format({filter = function(c) return c.name ~="tsserver" end})]]
+    vim.cmd [[autocmd BufWritePre * silent! lua vim.lsp.buf.format({filter = function(c) return c.name ~="ts_ls" end})]]
 end)
 
 lsp_zero.setup()
