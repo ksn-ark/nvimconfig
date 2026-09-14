@@ -26,7 +26,7 @@ require('packer').startup(function(use)
     use 'tpope/vim-fugitive'
     use 'lewis6991/gitsigns.nvim'
     use 'mhinz/vim-startify'
-    use 'norcalli/nvim-colorizer.lua'
+    use 'catgoose/nvim-colorizer.lua'
     use 'sbdchd/neoformat'
     use 'christoomey/vim-tmux-navigator'
 
